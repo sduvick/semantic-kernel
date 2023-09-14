@@ -35,7 +35,10 @@ var configJson = @"{
     ""OpenAIEmbeddings"": {
     ""ServiceId"": ""text-embedding-ada-002"",
     ""ModelId"": ""text-embedding-ada-002"",
-    ""ApiKey"": ""sk-....""
+  },
+  ""Bing"": {
+    ""Endpoint"" : """"
+
   },
   ""AzureOpenAIEmbeddings"": {
     ""ServiceId"": ""azure-text-embedding-ada-002"",
