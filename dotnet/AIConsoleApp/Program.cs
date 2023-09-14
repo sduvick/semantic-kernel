@@ -51,10 +51,10 @@ var configJson = @"{
     ""Endpoint"": ""https://eastus-shared-prd-cs.openai.azure.com""
   },
   ""AzureOpenAI"": {
-    ""serviceId"": ""gpt-35-turbo"",
-    ""deploymentName"": ""gpt-35-turbo"",
-    ""chatDeploymentName"": ""gpt-35-turbo"",
-    ""modelId"": ""gpt-3.5-turbo"",
+    ""ServiceId"": ""gpt-35-turbo"",
+    ""DeploymentName"": ""gpt-35-turbo"",
+    ""ChatDeploymentName"": ""gpt-35-turbo"",
+    ""ModelId"": ""0613"",
     ""Endpoint"": ""https://eastus-shared-prd-cs.openai.azure.com""
   }
 }";
@@ -69,10 +69,10 @@ IConfigurationRoot configRoot = new ConfigurationBuilder()
 TestConfiguration.Initialize(configRoot);
 
 
-await Example01_NativeFunctions.RunAsync();
-await Example02_Pipeline.RunAsync();
-await Example03_Variables.RunAsync();
-await Example04_CombineLLMPromptsAndNativeCode.RunAsync();
+//await Example01_NativeFunctions.RunAsync();
+//await Example02_Pipeline.RunAsync();
+//await Example03_Variables.RunAsync();
+//await Example04_CombineLLMPromptsAndNativeCode.RunAsync();
 await Example05_InlineFunctionDefinition.RunAsync();
 await Example06_TemplateLanguage.RunAsync();
 await Example07_BingAndGoogleSkills.RunAsync();
@@ -96,7 +96,6 @@ await Example25_ReadOnlyMemoryStore.RunAsync();
 await Example26_AADAuth.RunAsync();
 await Example27_SemanticFunctionsUsingChatGPT.RunAsync();
 await Example28_ActionPlanner.RunAsync();
-await Example29_Tokenizer.RunAsync();
 await Example30_ChatWithPrompts.RunAsync();
 await Example31_CustomPlanner.RunAsync();
 await Example32_StreamingCompletion.RunAsync();
