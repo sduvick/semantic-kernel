@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Azure.Identity;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.Memory.AzureCognitiveSearch;
 using Microsoft.SemanticKernel.Memory;
@@ -36,8 +37,8 @@ public static class Example14_SemanticMemory
 
         var kernelWithACS = Kernel.Builder
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAITextEmbeddingGenerationService("text-embedding-ada-002", TestConfiguration.OpenAI.ApiKey)
-            .WithMemoryStorage(new AzureCognitiveSearchMemoryStore(TestConfiguration.ACS.Endpoint, TestConfiguration.ACS.ApiKey))
+            .WithAzureTextEmbeddingGenerationService("text-embedding-ada-002", TestConfiguration.AzureOpenAIEmbeddings.Endpoint, new DefaultAzureCredential())
+            .WithMemoryStorage(new AzureCognitiveSearchMemoryStore(TestConfiguration.ACS.Endpoint, new DefaultAzureCredential()))
             .Build();
 
         await RunExampleAsync(kernelWithACS);
@@ -57,7 +58,7 @@ public static class Example14_SemanticMemory
 
         var kernelWithCustomDb = Kernel.Builder
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAITextEmbeddingGenerationService("ada", "text-embedding-ada-002", TestConfiguration.OpenAI.ApiKey)
+            .WithAzureTextEmbeddingGenerationService(TestConfiguration.AzureOpenAIEmbeddings.DeploymentName, TestConfiguration.AzureOpenAIEmbeddings.Endpoint, new DefaultAzureCredential())
             .WithMemoryStorage(new VolatileMemoryStore())
             .Build();
 

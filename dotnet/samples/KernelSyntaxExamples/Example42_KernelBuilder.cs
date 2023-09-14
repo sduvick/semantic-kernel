@@ -75,7 +75,7 @@ public static class Example42_KernelBuilder
         var textEmbeddingGenerator = new AzureTextEmbeddingGeneration(
             modelId: azureOpenAIEmbeddingDeployment,
             endpoint: azureOpenAIEndpoint,
-            apiKey: azureOpenAIKey,
+            new Azure.Identity.DefaultAzureCredential(),
             loggerFactory: loggerFactory);
         using var memory = new SemanticTextMemory(memoryStorage, textEmbeddingGenerator);
         var skills = new SkillCollection();

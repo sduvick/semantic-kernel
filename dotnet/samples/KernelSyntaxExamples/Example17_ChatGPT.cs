@@ -15,7 +15,7 @@ public static class Example17_ChatGPT
     public static async Task RunAsync()
     {
         await AzureOpenAIChatSampleAsync();
-        await OpenAIChatSampleAsync();
+        //await OpenAIChatSampleAsync();
 
         /* Output:
 
@@ -62,7 +62,7 @@ public static class Example17_ChatGPT
         AzureChatCompletion azureChatCompletion = new(
             TestConfiguration.AzureOpenAI.ChatDeploymentName,
             TestConfiguration.AzureOpenAI.Endpoint,
-            TestConfiguration.AzureOpenAI.ApiKey);
+            new Azure.Identity.DefaultAzureCredential());
 
         await StartChatAsync(azureChatCompletion);
     }

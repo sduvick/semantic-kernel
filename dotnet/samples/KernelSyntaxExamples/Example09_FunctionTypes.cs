@@ -20,7 +20,7 @@ public static class Example09_FunctionTypes
 
         var kernel = Kernel.Builder
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAIChatCompletionService(TestConfiguration.OpenAI.ChatModelId, TestConfiguration.OpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         // Load native skill into the kernel skill collection, sharing its functions with prompt templates

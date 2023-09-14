@@ -21,19 +21,11 @@ public static class Example07_BingAndGoogleSkills
     public static async Task RunAsync()
     {
         string openAIModelId = TestConfiguration.OpenAI.ChatModelId;
-        string openAIApiKey = TestConfiguration.OpenAI.ApiKey;
 
-        if (openAIModelId == null || openAIApiKey == null)
-        {
-            Console.WriteLine("OpenAI credentials not found. Skipping example.");
-            return;
-        }
 
         IKernel kernel = new KernelBuilder()
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAIChatCompletionService(
-                modelId: openAIModelId,
-                apiKey: openAIApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         // Load Bing skill

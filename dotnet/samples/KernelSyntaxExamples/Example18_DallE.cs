@@ -17,8 +17,22 @@ public static class Example18_DallE
 {
     public static async Task RunAsync()
     {
-        await OpenAIDallEAsync();
-        await AzureOpenAIDallEAsync();
+        if(!string.IsNullOrWhiteSpace(TestConfiguration.OpenAI.ApiKey))
+        {
+            await OpenAIDallEAsync();
+        }
+        else
+        {
+            Console.WriteLine("OpenAI API key is not set. Skipping OpenAI Dall-E example.");
+        }
+        if (!string.IsNullOrWhiteSpace(TestConfiguration.AzureOpenAI.ApiKey))
+        {
+            await AzureOpenAIDallEAsync();
+        }
+        else
+        {
+            Console.WriteLine("Azure OpenAI API key is not set. Skipping Azure OpenAI Dall-E example.");
+        }
     }
 
     private static async Task OpenAIDallEAsync()
@@ -99,7 +113,7 @@ public static class Example18_DallE
             // Add your image generation service
             .WithAzureOpenAIImageGenerationService(TestConfiguration.AzureOpenAI.Endpoint, TestConfiguration.AzureOpenAI.ApiKey)
             // Add your chat completion service
-            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.ChatDeploymentName, TestConfiguration.AzureOpenAI.Endpoint, TestConfiguration.AzureOpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.ChatDeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         IImageGeneration dallE = kernel.GetService<IImageGeneration>();

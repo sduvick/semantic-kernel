@@ -24,7 +24,7 @@ public static class Example36_MultiCompletion
         var chatCompletion = new AzureChatCompletion(
             TestConfiguration.AzureOpenAI.ChatDeploymentName,
             TestConfiguration.AzureOpenAI.Endpoint,
-            TestConfiguration.AzureOpenAI.ApiKey);
+            new Azure.Identity.DefaultAzureCredential());
 
         await ChatCompletionAsync(chatCompletion);
     }

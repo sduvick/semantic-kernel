@@ -23,9 +23,7 @@ public static class Example10_DescribeAllSkillsAndFunctions
         Console.WriteLine("======== Describe all skills and functions ========");
 
         var kernel = Kernel.Builder
-            .WithOpenAIChatCompletionService(
-                modelId: TestConfiguration.OpenAI.ChatModelId,
-                apiKey: TestConfiguration.OpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         // Import a native skill

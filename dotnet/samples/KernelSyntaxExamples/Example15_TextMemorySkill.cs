@@ -85,7 +85,7 @@ public static class Example15_TextMemorySkill
 
     private static IMemoryStore CreateSampleAzureCognitiveSearchMemoryStore()
     {
-        IMemoryStore store = new AzureCognitiveSearchMemoryStore(TestConfiguration.ACS.Endpoint, TestConfiguration.ACS.ApiKey);
+        IMemoryStore store = new AzureCognitiveSearchMemoryStore(TestConfiguration.ACS.Endpoint, new Azure.Identity.DefaultAzureCredential());
         return store;
     }
 

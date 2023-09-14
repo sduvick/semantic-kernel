@@ -14,17 +14,9 @@ public static class Example04_CombineLLMPromptsAndNativeCode
     {
         Console.WriteLine("======== LLMPrompts ========");
 
-        string openAIApiKey = TestConfiguration.OpenAI.ApiKey;
-
-        if (openAIApiKey == null)
-        {
-            Console.WriteLine("OpenAI credentials not found. Skipping example.");
-            return;
-        }
-
         IKernel kernel = new KernelBuilder()
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAIChatCompletionService(TestConfiguration.OpenAI.ChatModelId, openAIApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         // Load native skill

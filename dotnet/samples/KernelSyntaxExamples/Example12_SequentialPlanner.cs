@@ -13,11 +13,11 @@ using Skills;
 
 // ReSharper disable CommentTypo
 // ReSharper disable once InconsistentNaming
-internal static class Example12_SequentialPlanner
+public static class Example12_SequentialPlanner
 {
     public static async Task RunAsync()
     {
-        await PoetrySamplesAsync();
+        //await PoetrySamplesAsync();
         await EmailSamplesWithRecallAsync();
         await BookSamplesAsync();
         await MemorySampleAsync();
@@ -70,15 +70,12 @@ internal static class Example12_SequentialPlanner
         Console.WriteLine("======== Sequential Planner - Create and Execute Poetry Plan ========");
         var kernel = new KernelBuilder()
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithAzureChatCompletionService(
-                TestConfiguration.AzureOpenAI.ChatDeploymentName,
-                TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         string folder = RepoFiles.SampleSkillsPath();
         kernel.ImportSemanticSkillFromDirectory(folder,
-            "SummarizeSkill",
+
             "WriterSkill");
 
         var planner = new SequentialPlanner(kernel);
@@ -261,11 +258,9 @@ internal static class Example12_SequentialPlanner
     {
         var kernel = new KernelBuilder()
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithAzureChatCompletionService(
-                TestConfiguration.AzureOpenAI.ChatDeploymentName,
-                TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
+
 
         planner = new SequentialPlanner(kernel, new SequentialPlannerConfig { MaxTokens = maxTokens });
 
@@ -278,14 +273,11 @@ internal static class Example12_SequentialPlanner
         // use these to generate and store embeddings for the function descriptions.
         var kernel = new KernelBuilder()
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithAzureChatCompletionService(
-                TestConfiguration.AzureOpenAI.ChatDeploymentName,
-                TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .WithAzureTextEmbeddingGenerationService(
                 TestConfiguration.AzureOpenAIEmbeddings.DeploymentName,
                 TestConfiguration.AzureOpenAIEmbeddings.Endpoint,
-                TestConfiguration.AzureOpenAIEmbeddings.ApiKey)
+                new Azure.Identity.DefaultAzureCredential())
             .WithMemoryStorage(new VolatileMemoryStore())
             .Build();
 
@@ -302,7 +294,7 @@ internal static class Example12_SequentialPlanner
         var textEmbeddingGenerator = new Microsoft.SemanticKernel.Connectors.AI.OpenAI.TextEmbedding.AzureTextEmbeddingGeneration(
             modelId: TestConfiguration.AzureOpenAIEmbeddings.DeploymentName,
             endpoint: TestConfiguration.AzureOpenAIEmbeddings.Endpoint,
-            apiKey: TestConfiguration.AzureOpenAIEmbeddings.ApiKey);
+            new Azure.Identity.DefaultAzureCredential());
         var memory = new SemanticTextMemory(memoryStorage, textEmbeddingGenerator);
         return memory;
     }

@@ -20,7 +20,7 @@ internal static class ConsoleLogger
     {
         return Microsoft.Extensions.Logging.LoggerFactory.Create(builder =>
         {
-            builder.SetMinimumLevel(LogLevel.Warning);
+            builder.SetMinimumLevel(LogLevel.Trace);
 
             // builder.AddFilter("Microsoft", LogLevel.Trace);
             // builder.AddFilter("Microsoft", LogLevel.Debug);

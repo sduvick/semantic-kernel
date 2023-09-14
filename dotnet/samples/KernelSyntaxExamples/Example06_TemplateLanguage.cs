@@ -19,19 +19,10 @@ public static class Example06_TemplateLanguage
         Console.WriteLine("======== TemplateLanguage ========");
 
         string openAIModelId = TestConfiguration.OpenAI.ChatModelId;
-        string openAIApiKey = TestConfiguration.OpenAI.ApiKey;
-
-        if (openAIModelId == null || openAIApiKey == null)
-        {
-            Console.WriteLine("OpenAI credentials not found. Skipping example.");
-            return;
-        }
-
+        
         IKernel kernel = Kernel.Builder
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAIChatCompletionService(
-                modelId: openAIModelId,
-                apiKey: openAIApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         // Load native skill into the kernel skill collection, sharing its functions with prompt templates

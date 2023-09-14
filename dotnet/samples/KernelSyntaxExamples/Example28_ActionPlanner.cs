@@ -18,7 +18,7 @@ public static class Example28_ActionPlanner
             .WithAzureChatCompletionService(
                 TestConfiguration.AzureOpenAI.ChatDeploymentName,
                 TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+                new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         string folder = RepoFiles.SampleSkillsPath();

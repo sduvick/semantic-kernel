@@ -33,19 +33,15 @@ public static class Example26_AADAuth
             ExcludeEnvironmentCredential = false,
             ExcludeManagedIdentityCredential = false,
             ExcludeSharedTokenCacheCredential = false,
-            ExcludeAzureCliCredential = true,
+            ExcludeAzureCliCredential = false,
             ExcludeVisualStudioCredential = true,
             ExcludeVisualStudioCodeCredential = true,
             ExcludeInteractiveBrowserCredential = true,
         };
 
         IKernel kernel = new KernelBuilder()
-            .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            // Add Azure chat completion service using DefaultAzureCredential AAD auth
-            .WithAzureChatCompletionService(
-                TestConfiguration.AzureOpenAI.ChatDeploymentName,
-                "https://....openai.azure.com/",
-                new DefaultAzureCredential(authOptions))
+// Add Azure chat completion service using DefaultAzureCredential AAD auth
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         IChatCompletion chatGPT = kernel.GetService<IChatCompletion>();

@@ -9,7 +9,7 @@ using RepoUtils;
 
 // ReSharper disable CommentTypo
 // ReSharper disable once InconsistentNaming
-internal static class Example48_GroundednessChecks
+public static class Example48_GroundednessChecks
 {
     private static string s_groundingText = @"""I am by birth a Genevese, and my family is one of the most distinguished of that republic.
 My ancestors had been for many years counsellors and syndics, and my father had filled several public situations

@@ -18,7 +18,7 @@ using RepoUtils;
 
 // ReSharper disable CommentTypo
 // ReSharper disable once InconsistentNaming
-internal static class Example31_CustomPlanner
+public static class Example31_CustomPlanner
 {
     public static async Task RunAsync()
     {
@@ -131,11 +131,11 @@ internal static class Example31_CustomPlanner
             .WithAzureChatCompletionService(
                 TestConfiguration.AzureOpenAI.ChatDeploymentName,
                 TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+                new Azure.Identity.DefaultAzureCredential())
             .WithAzureTextEmbeddingGenerationService(
                 TestConfiguration.AzureOpenAIEmbeddings.DeploymentName,
                 TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+                new Azure.Identity.DefaultAzureCredential())
             .WithMemoryStorage(new VolatileMemoryStore())
             .Build();
     }

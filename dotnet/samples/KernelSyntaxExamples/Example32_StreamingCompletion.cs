@@ -28,7 +28,7 @@ public static class Example32_StreamingCompletion
         var textCompletion = new AzureTextCompletion(
             TestConfiguration.AzureOpenAI.DeploymentName,
             TestConfiguration.AzureOpenAI.Endpoint,
-            TestConfiguration.AzureOpenAI.ApiKey);
+            new Azure.Identity.DefaultAzureCredential());
 
         await TextCompletionStreamAsync(textCompletion);
     }

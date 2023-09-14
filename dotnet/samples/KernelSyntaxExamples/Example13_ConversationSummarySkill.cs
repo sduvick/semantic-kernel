@@ -11,7 +11,7 @@ using RepoUtils;
 
 // ReSharper disable once InconsistentNaming
 
-internal static class Example13_ConversationSummarySkill
+public static class Example13_ConversationSummarySkill
 {
     private const string ChatTranscript =
         @"
@@ -180,10 +180,7 @@ Jane: Goodbye!
     {
         IKernel kernel = Kernel.Builder
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithAzureChatCompletionService(
-                TestConfiguration.AzureOpenAI.ChatDeploymentName,
-                TestConfiguration.AzureOpenAI.Endpoint,
-                TestConfiguration.AzureOpenAI.ApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
         .Build();
 
         return kernel;

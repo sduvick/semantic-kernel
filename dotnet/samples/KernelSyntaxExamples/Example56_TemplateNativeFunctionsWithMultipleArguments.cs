@@ -34,8 +34,7 @@ public static class Example56_TemplateNativeFunctionsWithMultipleArguments
             .WithAzureChatCompletionService(
                 deploymentName: deploymentName,
                 endpoint: endpoint,
-                serviceId: serviceId,
-                apiKey: apiKey)
+                new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         var variableName = "word2";

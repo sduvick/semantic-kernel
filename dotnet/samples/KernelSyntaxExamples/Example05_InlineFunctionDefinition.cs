@@ -13,13 +13,7 @@ public static class Example05_InlineFunctionDefinition
         Console.WriteLine("======== Inline Function Definition ========");
 
         string openAIModelId = TestConfiguration.OpenAI.ChatModelId;
-        string openAIApiKey = TestConfiguration.OpenAI.ApiKey;
 
-        if (openAIModelId == null || openAIApiKey == null)
-        {
-            Console.WriteLine("OpenAI credentials not found. Skipping example.");
-            return;
-        }
 
         /*
          * Example: normally you would place prompt templates in a folder to separate
@@ -29,9 +23,7 @@ public static class Example05_InlineFunctionDefinition
 
         IKernel kernel = new KernelBuilder()
             .WithLoggerFactory(ConsoleLogger.LoggerFactory)
-            .WithOpenAIChatCompletionService(
-                modelId: openAIModelId,
-                apiKey: openAIApiKey)
+            .WithAzureChatCompletionService(TestConfiguration.AzureOpenAI.DeploymentName, TestConfiguration.AzureOpenAI.Endpoint, new Azure.Identity.DefaultAzureCredential())
             .Build();
 
         // Function defined using few-shot design pattern
